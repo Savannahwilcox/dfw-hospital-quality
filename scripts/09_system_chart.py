@@ -69,7 +69,7 @@ ax.set_axisbelow(True)
 
 fig.text(0.04, 0.93, "Share of DFW hospitals CMS rates better than national on death rates",
          fontsize=14, fontweight="bold", ha="left")
-fig.text(0.04, 0.88, "Better than national on at least one of CMS's condition-specific 30-day mortality measures",
+fig.text(0.04, 0.88, "Better than national on at least one of CMS's death rate measures",
          fontsize=10, color=MUTED, ha="left")
 fig.text(0.04, 0.03, SOURCE, fontsize=7.5, color=MUTED, ha="left")
 
