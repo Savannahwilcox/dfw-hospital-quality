@@ -15,11 +15,21 @@ Heart failure readmissions came out almost the same (60% vs 37%).
 
 In DFW the hospitals at the top of the patient ratings are mostly specialty hospitals. 8 of the top 13 have heart, surgery or orthopedic in the name. A lot of their patients are coming in for planned procedures and aren't as sick, so that probably helps their ratings.
 
-The part I thought was most interesting was the big hospitals. Parkland, Baylor University Medical Center and Texas Health Harris Methodist Fort Worth all have some of the lowest death rates in DFW (2.5 to 2.6%) but patients rate them about average. Parkland is at 70%, which is right around the national median.
-
 Also DFW patients just rate their hospitals higher than the rest of the country. 49 of the 67 DFW hospitals were above the national median.
 
 ![DFW chart](charts/dfw_scatter.png)
+
+## Death rates by DFW health system
+
+I also compared the hospital wide death rate to CMS's older death rate measures (heart attack, heart failure, pneumonia, COPD, stroke and bypass surgery). For those, CMS says whether each hospital is better, no different or worse than national. The two mostly agree. Hospitals rated better on the older measures average 3.1% on the hospital wide rate and hospitals rated worse average 4.4%. But the older measures rate 66% of hospitals "no different" on every single one, so they don't separate most hospitals at all.
+
+In DFW, Baylor Scott & White stands out. 8 of its 13 hospitals are rated better than national on at least one of the older measures. Texas Health Resources is 3 of 17, Medical City is 1 of 10 and Methodist is 0 of 5. No DFW hospital was rated worse on any of them.
+
+Methodist's patients actually gave it the highest ratings of any system (78% rating it a 9 or 10), but none of its hospitals were rated better on death rates.
+
+It's easier for a big hospital to get rated better since more patients means a tighter estimate, so I checked whether Baylor's hospitals were just bigger. They are not. Their median is about 2,240 patients compared to about 2,490 for Medical City and 2,820 for Methodist. Looking only at the bigger half of DFW hospitals, Baylor is still 7 of 8.
+
+![DFW systems chart](charts/dfw_systems_mortality.png)
 
 ## Data
 
@@ -38,6 +48,8 @@ For the patient rating I used the % of patients who rated the hospital a 9 or 10
 
 For outcomes I used the hospital wide 30 day death rate and the heart failure 30 day readmission rate. Both are risk adjusted by CMS. I wanted to use the hospital wide readmission rate to match the death rate, but it was blank for every hospital in this release. I also dropped any hospital CMS marked as having too few cases.
 
+For the health system comparison I used the counts of better, no different and worse mortality measures from the Hospital General Information file, and only included hospitals with at least 3 of those measures. A hospital counts as rated better if at least one measure is better than national. Hospital size is the number of patients in the hospital wide death rate measure.
+
 DFW is the 11 counties the Census Bureau counts in the Dallas Fort Worth metro: Collin, Dallas, Denton, Ellis, Hunt, Johnson, Kaufman, Parker, Rockwall, Tarrant and Wise.
 
 I ran the main comparison on the whole country instead of just DFW. Only 67 DFW hospitals had both numbers, and that's too small to tell if a pattern is real.
@@ -47,6 +59,10 @@ I ran the main comparison on the whole country instead of just DFW. Only 67 DFW 
 Risk adjustment isn't perfect, especially for hospitals that get a lot of very sick transfers. The ratings and outcomes also cover slightly different time periods. This only shows the two are related, not why.
 
 Heart failure readmission rates are really close together across hospitals (most are between 20.6% and 22.1%) so I wouldn't read much into small differences there.
+
+The hospital wide death rate is a newer CMS measure and this release doesn't include a confidence interval or a better/worse rating for it, so I don't compare individual hospitals on it alone.
+
+Health systems are assigned from the facility name, so joint ventures and recently acquired hospitals might not be grouped exactly right.
 
 ## Running it
 
@@ -67,6 +83,8 @@ python scripts/04_combine.py
 python scripts/05_analysis.py
 python scripts/06_dfw.py
 python scripts/07_charts.py
+python scripts/08_mortality_measures.py
+python scripts/09_system_chart.py
 ```
 
 Built with Python, pandas and matplotlib
