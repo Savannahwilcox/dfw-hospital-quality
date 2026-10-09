@@ -1,0 +1,72 @@
+# DFW hospital patient ratings vs. death rates
+Primary Research Question: I wanted to know if the hospitals patients rate the highest are actually the ones where patients do better. Patient ratings are the easy thing to find when you look up a hospital. Death rates and readmission rates are public too but most dont look at them. 
+
+I used CMS Care Compare data for every acute care hospital in the US and then looked at the Dallas Fort Worth area specifically.
+
+## Findings
+
+Higher rated hospitals do have somewhat lower death rates, but it's not a strong pattern. I split about 2,700 hospitals into five groups by patient rating. In the lowest rated group, 59% of hospitals had a death rate above the national median. In the highest rated group it was 36%. So a top rated hospital is a better bet, but more than a third of them are still above the median.
+
+The actual death rates aren't that far apart either. 4.1% on average in the lowest rated group and 3.7% in the highest.
+
+Heart failure readmissions came out almost the same (60% vs 37%).
+
+![National chart](charts/national_rating_groups.png)
+
+In DFW the hospitals at the top of the patient ratings are mostly specialty hospitals. 8 of the top 13 have heart, surgery or orthopedic in the name. A lot of their patients are coming in for planned procedures and aren't as sick, so that probably helps their ratings.
+
+The part I thought was most interesting was the big hospitals. Parkland, Baylor University Medical Center and Texas Health Harris Methodist Fort Worth all have some of the lowest death rates in DFW (2.5 to 2.6%) but patients rate them about average. Parkland is at 70%, which is right around the national median.
+
+Also DFW patients just rate their hospitals higher than the rest of the country. 49 of the 67 DFW hospitals were above the national median.
+
+![DFW chart](charts/dfw_scatter.png)
+
+## Data
+
+From [CMS Care Compare](https://data.cms.gov/provider-data/topics/hospitals), 2026 release. I used four files:
+
+- Hospital General Information
+- Patient survey (HCAHPS) - Hospital
+- Complications and Deaths - Hospital
+- Unplanned Hospital Visits - Hospital
+
+## Process
+
+I only kept regular acute care hospitals. The data also has critical access hospitals (small rural ones), VA and military hospitals, psych and children's hospitals, and those aren't comparable.
+
+For the patient rating I used the % of patients who rated the hospital a 9 or 10 out of 10. I dropped hospitals with fewer than 100 surveys 
+
+For outcomes I used the hospital wide 30 day death rate and the heart failure 30 day readmission rate. Both are risk adjusted by CMS. I wanted to use the hospital wide readmission rate to match the death rate, but it was blank for every hospital in this release. I also dropped any hospital CMS marked as having too few cases.
+
+DFW is the 11 counties the Census Bureau counts in the Dallas Fort Worth metro: Collin, Dallas, Denton, Ellis, Hunt, Johnson, Kaufman, Parker, Rockwall, Tarrant and Wise.
+
+I ran the main comparison on the whole country instead of just DFW. Only 67 DFW hospitals had both numbers, and that's too small to tell if a pattern is real.
+
+## Notes
+
+Risk adjustment isn't perfect, especially for hospitals that get a lot of very sick transfers. The ratings and outcomes also cover slightly different time periods. This only shows the two are related, not why.
+
+Heart failure readmission rates are really close together across hospitals (most are between 20.6% and 22.1%) so I wouldn't read much into small differences there.
+
+## Running it
+
+```bash
+git clone https://github.com/Savannahwilcox/dfw-hospital-quality.git
+cd dfw-hospital-quality
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Download the four files from CMS into `data/raw/`, then run the scripts in order:
+
+```bash
+python scripts/02_patient_survey.py
+python scripts/03_outcomes.py
+python scripts/04_combine.py
+python scripts/05_analysis.py
+python scripts/06_dfw.py
+python scripts/07_charts.py
+```
+
+Built with Python, pandas and matplotlib
