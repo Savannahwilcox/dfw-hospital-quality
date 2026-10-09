@@ -44,3 +44,52 @@ print()
 print(dfw[cols].to_string(index=False))
 
 df.to_csv("data/clean/mortality_compare.csv", index=False)
+
+# tag each DFW hospital with its health system, based on the name
+def system(name):
+    name = name.upper()
+    if "BAYLOR" in name:
+        return "Baylor Scott & White"
+    if "TEXAS HEALTH" in name:
+        return "Texas Health Resources"
+    if "MEDICAL CITY" in name:
+        return "Medical City (HCA)"
+    if "METHODIST" in name:
+        return "Methodist Health System"
+    return "Other"
+
+
+dfw = dfw.copy()
+dfw["system"] = dfw["Facility Name"].apply(system)
+dfw["rated_better"] = dfw["old_rating"].isin(["Better on 1+", "Mixed"])
+
+print(dfw.groupby("system").agg(
+    hospitals=("system", "size"),
+    rated_better=("rated_better", "sum"),
+    avg_death_rate=("death_rate", "mean"),
+    avg_pct_9_10=("pct_9_10", "mean"),
+).round(2).to_string())
+
+# check whether Baylors lead is just a size effect
+deaths = pd.read_csv("data/raw/Complications_and_Deaths-Hospital.csv", dtype=str)
+hwm = deaths[deaths["Measure ID"] == "Hybrid_HWM"][["Facility ID", "Denominator"]].copy()
+hwm["patients"] = pd.to_numeric(hwm["Denominator"], errors="coerce")
+
+dfw = dfw.merge(hwm[["Facility ID", "patients"]], on="Facility ID", how="left")
+
+print()
+print("Median patients, rated better vs not:")
+print(dfw.groupby("rated_better")["patients"].median())
+
+print()
+print("Median patients by system:")
+print(dfw.groupby("system")["patients"].median())
+
+# compare systems using only the bigger half of DFW hospitals
+big = dfw[dfw["patients"] >= dfw["patients"].median()]
+print()
+print("Bigger half of DFW hospitals only:")
+print(big.groupby("system").agg(
+    hospitals=("system", "size"),
+    rated_better=("rated_better", "sum"),
+).to_string())
