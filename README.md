@@ -21,13 +21,13 @@ Also DFW patients just rate their hospitals higher than the rest of the country.
 
 ## Death rates by DFW health system
 
-I also compared the hospital wide death rate to CMS's older death rate measures (heart attack, heart failure, pneumonia, COPD, stroke and bypass surgery). For those, CMS says whether each hospital is better, no different or worse than national. The two mostly agree. Hospitals rated better on the older measures average 3.1% on the hospital wide rate and hospitals rated worse average 4.4%. But the older measures rate 66% of hospitals "no different" on every single one, so they don't separate most hospitals at all.
+I also compared the hospital wide death rate to CMS's other death rate measures (heart attack, heart failure, pneumonia, COPD, stroke, bypass surgery and a couple others, up to 8 per hospital). For those, CMS says whether each hospital is better, no different or worse than national. The two mostly agree. Hospitals rated better on at least one of those measures average 3.1% on the hospital wide rate and hospitals rated worse average 4.4%. But 66% of hospitals are rated "no different" on every single one, so those ratings don't separate most hospitals at all.
 
-In DFW, Baylor Scott & White stands out. 8 of its 13 hospitals are rated better than national on at least one of the older measures. Texas Health Resources is 3 of 17, Medical City is 1 of 10 and Methodist is 0 of 5. No DFW hospital was rated worse on any of them.
+In DFW, Baylor Scott & White stands out. 8 of its 13 hospitals are rated better than national on at least one death rate measure. Texas Health Resources is 3 of 17, Medical City is 1 of 10 and Methodist is 0 of 5. Only one DFW hospital, Texas Health Harris Methodist Fort Worth, had a measure rated worse, and it also had one rated better.
 
 Methodist's patients actually gave it the highest ratings of any system (78% rating it a 9 or 10), but none of its hospitals were rated better on death rates.
 
-It's easier for a big hospital to get rated better since more patients means a tighter estimate, so I checked whether Baylor's hospitals were just bigger. They are not. Their median is about 2,240 patients compared to about 2,490 for Medical City and 2,820 for Methodist. Looking only at the bigger half of DFW hospitals, Baylor is still 7 of 8.
+It's easier for a big hospital to get rated better since more patients means a tighter estimate, so I checked whether Baylor's hospitals were just bigger. They aren't. Their median is about 2,240 patients compared to about 2,490 for Medical City and 2,820 for Methodist. Looking only at the bigger half of DFW hospitals, Baylor is still 7 of 8.
 
 ![DFW systems chart](charts/dfw_systems_mortality.png)
 
