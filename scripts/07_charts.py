@@ -7,7 +7,7 @@ MUTED = "#7d8794"
 ACCENT = "#b5432c"
 LIGHT = "#c9ced4"
 GRID = "#e6e8eb"
-SOURCE = "Source: CMS Care Compare, 2026 release. US acute care hospitals with 100+ patient surveys."
+SOURCE = "Source: CMS Care Compare, July 2026 release. US acute care hospitals with 100+ patient surveys."
 
 plt.rcParams["font.family"] = FONT
 plt.rcParams["text.color"] = INK
@@ -62,7 +62,7 @@ labels = {
     "450021": ("Baylor University Medical Center", (-8, -14), "right"),
     "450044": ("UT Southwestern", (8, -4), "left"),
     "450135": ("Texas Health Fort Worth", (8, 4), "left"),
-    "670132": ("Methodist Southlake", (-8, -24), "right"),
+    "670132": ("Methodist Southlake", (-10, -40), "right"),
     "670060": ("Baylor Scott & White Sunnyvale", (8, -4), "left"),
 }
 
@@ -76,8 +76,12 @@ for fid, (name, offset, side) in labels.items():
         continue
     x, y = row["pct_9_10"].iloc[0], row["death_rate"].iloc[0]
     ax.scatter(x, y, s=60, color=ACCENT, edgecolor="white", linewidth=0.8, zorder=3)
+    if fid == "670132":
+        arrow = dict(arrowstyle="-", color=MUTED, linewidth=0.7, shrinkA=0, shrinkB=4)
+    else:
+        arrow = None
     ax.annotate(name, (x, y), xytext=offset, textcoords="offset points",
-                fontsize=9, color=INK, ha=side)
+                fontsize=9, color=INK, ha=side, arrowprops=arrow)
 
 ax.axhline(median_death, color=MUTED, linestyle=(0, (3, 3)), linewidth=1)
 ax.text(ax.get_xlim()[0] + 0.3, median_death + 0.06, "US median", fontsize=8.5, color=MUTED, ha="left")

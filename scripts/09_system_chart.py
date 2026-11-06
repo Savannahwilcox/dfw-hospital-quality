@@ -10,7 +10,7 @@ MUTED = "#7d8794"
 ACCENT = "#b5432c"
 LIGHT = "#c9ced4"
 GRID = "#e6e8eb"
-SOURCE = "Source: CMS Care Compare, 2026 release. DFW acute care hospitals with 3+ CMS mortality measures. System assigned by facility name."
+SOURCE = "Source: CMS Care Compare, July 2026 release. DFW acute care hospitals with 3+ CMS mortality measures. System assigned by facility name."
 
 plt.rcParams["font.family"] = FONT
 plt.rcParams["text.color"] = INK

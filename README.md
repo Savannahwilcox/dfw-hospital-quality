@@ -1,5 +1,5 @@
 # DFW hospital patient ratings vs. death rates
-Primary Research Question: I wanted to know if the hospitals patients rate the highest are actually the ones where patients do better. Patient ratings are the easy thing to find when you look up a hospital. Death rates and readmission rates are public too but most dont look at them. 
+Primary Research Question: I wanted to know if the hospitals patients rate the highest are actually the ones where patients do better. Patient ratings are the easy thing to find when you look up a hospital. Death rates and readmission rates are public too but most don't look at them. 
 
 I used CMS Care Compare data for every acute care hospital in the US and then looked at the Dallas Fort Worth area specifically.
 
@@ -33,7 +33,7 @@ It's easier for a big hospital to get rated better since more patients means a t
 
 ## Data
 
-From [CMS Care Compare](https://data.cms.gov/provider-data/topics/hospitals), 2026 release. I used four files:
+From [CMS Care Compare](https://data.cms.gov/provider-data/topics/hospitals), July 2026 release. I used four files:
 
 - Hospital General Information
 - Patient survey (HCAHPS) - Hospital
@@ -44,7 +44,7 @@ From [CMS Care Compare](https://data.cms.gov/provider-data/topics/hospitals), 20
 
 I only kept regular acute care hospitals. The data also has critical access hospitals (small rural ones), VA and military hospitals, psych and children's hospitals, and those aren't comparable.
 
-For the patient rating I used the % of patients who rated the hospital a 9 or 10 out of 10. I dropped hospitals with fewer than 100 surveys 
+For the patient rating I used the % of patients who rated the hospital a 9 or 10 out of 10. I dropped hospitals with fewer than 100 surveys. 
 
 For outcomes I used the hospital wide 30 day death rate and the heart failure 30 day readmission rate. Both are risk adjusted by CMS. I wanted to use the hospital wide readmission rate to match the death rate, but it was blank for every hospital in this release. I also dropped any hospital CMS marked as having too few cases.
 
@@ -88,3 +88,8 @@ python scripts/09_system_chart.py
 ```
 
 Built with Python, pandas and matplotlib
+
+## What I'm working on next
+
+- Checking whether the number of mortality measures a hospital has explains the health system differences. A hospital with 8 measures has more chances to be rated better than one with 3.
+- Rerunning the national comparison without specialty hospitals (heart, surgical, orthopedic) to see if the rating gap holds up.

@@ -5,7 +5,7 @@ ratings = pd.read_csv("data/clean/patient_ratings.csv", dtype={"Facility ID": st
 deaths = pd.read_csv("data/clean/death_rate.csv", dtype={"Facility ID": str})
 readmits = pd.read_csv("data/clean/hf_readmit_rate.csv", dtype={"Facility ID": str})
 
-# keep regulular acute care hospitals only
+# keep regular acute care hospitals only
 hosp = hosp[hosp["Hospital Type"] == "Acute Care Hospitals"]
 hosp = hosp[["Facility ID", "Facility Name", "City/Town", "State",
              "County/Parish", "Hospital overall rating"]]
