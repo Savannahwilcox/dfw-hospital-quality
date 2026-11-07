@@ -1,5 +1,5 @@
 # look at DFW hospitals specifically- which ones fit the national
-# pattern and which dont
+# pattern and which don't
 
 import pandas as pd
 

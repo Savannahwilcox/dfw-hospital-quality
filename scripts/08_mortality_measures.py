@@ -70,6 +70,18 @@ print(dfw.groupby("system").agg(
     avg_pct_9_10=("pct_9_10", "mean"),
 ).round(2).to_string())
 
+# check whether Baylor's hospitals just have more measures,
+# which would give them more chances to be rated better
+dfw["share_better"] = dfw["mort_better"] / dfw["mort_measures"]
+
+print()
+print("Mortality measures and share rated better, by system:")
+print(dfw.groupby("system").agg(
+    hospitals=("system", "size"),
+    median_measures=("mort_measures", "median"),
+    avg_share_better=("share_better", "mean"),
+).round(2).to_string())
+
 # check whether Baylors lead is just a size effect
 deaths = pd.read_csv("data/raw/Complications_and_Deaths-Hospital.csv", dtype=str)
 hwm = deaths[deaths["Measure ID"] == "Hybrid_HWM"][["Facility ID", "Denominator"]].copy()
